@@ -1,9 +1,9 @@
-NAME		= zombie
+NAME		= megaphone
 
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-SRCS		= main.cpp Zombie.cpp NewZombie.cpp randomChump.cpp
+SRCS		= main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all:		$(NAME)
@@ -18,7 +18,7 @@ clean:
 			rm -f $(OBJS)
 
 fclean:		clean
-			rm -f $(NAME) a.out
+			rm -f $(NAME)
 
 re:			fclean all
 
