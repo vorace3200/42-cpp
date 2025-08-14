@@ -11,6 +11,7 @@ int main(int a, char **b) {
     std::string filename = std::string(b[1]);
     std::string s1 = std::string(b[2]);
     std::string s2 = std::string(b[3]);
+    
     if (s1.empty())
     {
         std::cout << "s1 can't be empty." << std::endl;
