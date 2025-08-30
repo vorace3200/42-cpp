@@ -4,6 +4,12 @@
 #include <string>
 class ClapTrap
 {
+    protected:
+        std::string name;
+        int hit;
+        int energy;
+        int damage;
+
     public:
         ClapTrap(const std::string& name);
         ~ClapTrap();
@@ -12,9 +18,5 @@ class ClapTrap
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
 
-    private:
-        std::string name;
-        int hit;
-        int energy;
-        int damage;
+
 };

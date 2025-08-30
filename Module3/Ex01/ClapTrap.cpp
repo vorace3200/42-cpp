@@ -40,7 +40,6 @@ void ClapTrap::beRepaired(unsigned int amount)
     std::cout << name << " repairs " << amount << " HP, now has " << hit << " HP." << std::endl;
 }
 
-
 ClapTrap::~ClapTrap()
 {
     std::cout << "ClapTrap Destructor has been called" << std::endl;
