@@ -67,6 +67,7 @@ int main()
         else
         {
             std::cout << "[ERROR] Command not found please type 'HELP'" << std::endl;
+            return (0);
         }
     }
   

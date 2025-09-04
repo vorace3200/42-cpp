@@ -68,7 +68,7 @@ void PhoneBook::search_contact()
     std::cout << "Enter index of contact to display details: ";
     std::cin >> search_index;
     
-    if (search_index >= 0 && search_index < 8 && this->contacts[search_index].get_informations(0) != "{NULL}")
+    if ((search_index >= 0 && search_index < 8) && !this->contacts[search_index].get_informations(0).empty() )
     {
         std::cout << "First Name: " << this->contacts[search_index].get_informations(0) << std::endl;
         std::cout << "Last Name: " << this->contacts[search_index].get_informations(1) << std::endl;
@@ -78,7 +78,7 @@ void PhoneBook::search_contact()
     }
     else
     {
-        std::cout << "Invalid index." << std::endl;
+        std::cout << "Invalid index or contact not found." << std::endl;
     }
 }
 
