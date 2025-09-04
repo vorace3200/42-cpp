@@ -10,7 +10,7 @@ void print_upchar(std::string string)
             string[i] = string[i] - 32;
         }
     }
-    std::cout << string << std::endl;
+    std::cout << string ;
 }
 
 int main(int a, char **b ) {

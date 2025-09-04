@@ -7,13 +7,15 @@
 
 int main()
 {
-    Cat npc_cat;
-    Dog npc_dog;
+    const Animal* other = new Animal();
+    const Animal* npc_dog = new Dog();
+    const Animal* npc_cat = new Cat();
+
     Animal* other = new Animal;
     std::cout << "=============== CAT CLASS ===============" << std::endl << std::endl;
 
-    std::cout << "[MAIN] Animal Cat type: " << npc_cat.getType() << std::endl;
-    std::cout << "[MAIN] Animal Cat sound: ";  npc_cat.makeSound(); std::cout << std::endl;
+    std::cout << "[MAIN] Animal Cat type: " << npc_cat->getType() << std::endl;
+    std::cout << "[MAIN] Animal Cat sound: ";  npc_cat->makeSound(); std::cout << std::endl;
 
     std::cout << "=============== CAT CLASS ===============" << std::endl << std::endl;
 
