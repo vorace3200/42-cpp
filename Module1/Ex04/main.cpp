@@ -2,6 +2,29 @@
 #include <fstream>
 #include <string>
 
+std::string check(const std::string& str) {
+    std::string result;
+    for (size_t i = 0; i < str.length(); i++) {
+        if (str[i] == '\\' && i + 1 < str.length()) {
+            switch (str[i + 1]) {
+                case 'n': 
+                    result += '\n'; i++; break;
+                case 't': 
+                    result += '\t'; i++; break;
+                case 'r': 
+                    result += '\r'; i++; break;
+                case '\\': 
+                    result += '\\'; i++; break;
+                default: 
+                    result += str[i]; break;
+            }
+        } else {
+            result += str[i];
+        }
+    }
+    return result;
+}
+
 int main(int a, char **b) {
     if (a != 4)
     {
@@ -9,8 +32,8 @@ int main(int a, char **b) {
         return 1;
     }
     std::string filename = std::string(b[1]);
-    std::string s1 = std::string(b[2]);
-    std::string s2 = std::string(b[3]);
+    std::string s1 = check(std::string(b[2]));
+    std::string s2 = check(std::string(b[3]));
     
     if (s1.empty())
     {
