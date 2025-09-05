@@ -36,6 +36,9 @@ int main() {
 
 
     std::cout << std::endl;
-
+    delete ak_47;
+    delete PlayerA;
+    delete PlayerB;
+    delete pistol;
     return 0;
 }

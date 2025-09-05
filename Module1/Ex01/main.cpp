@@ -6,7 +6,7 @@ int main() {
 
     for (int i = 0; i < 10; i++)
     {
-        std::cout << "Annoucing Zombie ID: #" << i << std::endl;
+        std::cout << "Announcing Zombie ID: #" << i << std::endl;
         Zombies[i].announce();
          
     }
