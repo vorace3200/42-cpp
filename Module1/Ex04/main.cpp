@@ -42,7 +42,6 @@ int main(int a, char **b) {
         pos = file_content.find(s1, pos + s2.size());
     }
 
-
     std::ofstream out((filename + ".replace").c_str(), std::ios::out | std::ios::binary);
     out << file_content;
     out.close();
