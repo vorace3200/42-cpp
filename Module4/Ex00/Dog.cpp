@@ -11,7 +11,7 @@ Dog::~Dog()
     std::cout << "[DOG] Class has been destroyed" << std::endl;
 }
 
-void Dog::makeSound()
+void Dog::makeSound() const
 {
     std::cout << this->type << " say: Wouuuuuuuf" << std::endl;
 }

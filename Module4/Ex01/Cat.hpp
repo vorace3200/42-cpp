@@ -3,11 +3,16 @@
 #include <iostream>
 #include <string>
 #include "animal.hpp"
-class Dog : public Animal
+#include "Brain.hpp"
+
+class Cat : public Animal
 {
     public:
-        Dog();
-        ~Dog();
+        Cat();
+        ~Cat();
         void makeSound() const;
+        
+    private:
+        Brain* brain;
     
 };

@@ -1,29 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iterator>
 
-std::string check(const std::string& str) {
-    std::string result;
-    for (size_t i = 0; i < str.length(); i++) {
-        if (str[i] == '\\' && i + 1 < str.length()) {
-            switch (str[i + 1]) {
-                case 'n': 
-                    result += '\n'; i++; break;
-                case 't': 
-                    result += '\t'; i++; break;
-                case 'r': 
-                    result += '\r'; i++; break;
-                case '\\': 
-                    result += '\\'; i++; break;
-                default: 
-                    result += str[i]; break;
-            }
-        } else {
-            result += str[i];
-        }
-    }
-    return result;
-}
 
 int main(int a, char **b) {
     if (a != 4)
@@ -32,8 +11,8 @@ int main(int a, char **b) {
         return 1;
     }
     std::string filename = std::string(b[1]);
-    std::string s1 = check(std::string(b[2]));
-    std::string s2 = check(std::string(b[3]));
+    std::string s1 = std::string(b[2]);
+    std::string s2 = std::string(b[3]);
     
     if (s1.empty())
     {
@@ -41,30 +20,32 @@ int main(int a, char **b) {
         return 1;
     }
 
-    std::ifstream file_handle(filename);
+    std::ifstream file_handle(filename.c_str(), std::ios::in | std::ios::binary);
     if (!file_handle)
     {
         std::cout << "File not found : " << filename << std::endl;
         return 1;
     }
-    file_handle.seekg(0, std::ios::end); 
-    size_t size = file_handle.tellg(); 
-    file_handle.seekg(0); 
+
+    std::string file_content((std::istreambuf_iterator<char>(file_handle)), (std::istreambuf_iterator<char>())); // std::istreambuf_iterator -> Iterrateur qui permet de lire caractere par caractere dans le flux.
+    if(file_content.empty())
+    {
+        std::cout << "File cannot be empty " << filename << std::endl;
+        return 1;
+    }
     
-    std::string content(size, '\0'); 
-    file_handle.read(&content[0], size);
-    size_t pos = content.find(s1);
+    size_t pos = file_content.find(s1);
     while (pos != std::string::npos)
     {
-        content.erase(pos, s1.size());
-
-        content.insert(pos, s2);
-        pos = content.find(s1, pos + s2.size());
+        file_content.erase(pos, s1.size());
+        file_content.insert(pos, s2);
+        pos = file_content.find(s1, pos + s2.size());
     }
 
-    std::ofstream file_replace(filename + ".replace");
-    file_replace << content;
-    file_replace.close();
+
+    std::ofstream out((filename + ".replace").c_str(), std::ios::out | std::ios::binary);
+    out << file_content;
+    out.close();
 
     return 0;
 }

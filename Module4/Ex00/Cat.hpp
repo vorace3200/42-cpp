@@ -8,6 +8,6 @@ class Cat : public Animal
     public:
         Cat();
         ~Cat();
-        const void makeSound();
+        void makeSound() const;
     
 };

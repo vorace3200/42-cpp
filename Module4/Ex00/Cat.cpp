@@ -11,7 +11,7 @@ Cat::~Cat()
     std::cout << "[CAT] Class has been destroyed" << std::endl;
 }
 
-const void Cat::makeSound()
+void Cat::makeSound() const
 {
     std::cout << this->type << " say: Miaouuuuuuuu" << std::endl;
 }

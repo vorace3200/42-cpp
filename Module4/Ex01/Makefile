@@ -1,9 +1,9 @@
-NAME		= zombieHorde
+NAME		= brain
 
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-SRCS		= main.cpp Zombie.cpp NewZombie.cpp RandomChump.cpp ZombieHorde.cpp
+SRCS		= main.cpp animal.cpp Cat.cpp Dog.cpp Brain.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all:		$(NAME)
