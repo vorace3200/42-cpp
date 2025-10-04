@@ -5,6 +5,8 @@
 int main() {
     
     Fixed a;
+    a.setRawBits(10);
+
     Fixed b( a );
     Fixed c;
 
@@ -14,6 +16,9 @@ int main() {
     std::cout << b.getRawBits() << std::endl;
     std::cout << c.getRawBits() << std::endl;
 
+
+    c.setRawBits(8);
+    std::cout << c.getRawBits() << std::endl;
 
     return 0;
 }

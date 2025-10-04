@@ -1,6 +1,6 @@
 #include "HumanB.hpp"
 
-void HumanB::attack() const
+void HumanB::attack()
 {
     if (!this->weapon)
     {

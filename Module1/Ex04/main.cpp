@@ -28,12 +28,11 @@ int main(int a, char **b) {
     }
 
     std::string file_content((std::istreambuf_iterator<char>(file_handle)), (std::istreambuf_iterator<char>())); // std::istreambuf_iterator -> Iterrateur qui permet de lire caractere par caractere dans le flux.
-    if(file_content.empty())
+    if (file_content.empty())
     {
-        std::cout << "File cannot be empty " << filename << std::endl;
+        std::cout << "file content can't be empty." << std::endl;
         return 1;
     }
-    
     size_t pos = file_content.find(s1);
     while (pos != std::string::npos)
     {
@@ -41,6 +40,7 @@ int main(int a, char **b) {
         file_content.insert(pos, s2);
         pos = file_content.find(s1, pos + s2.size());
     }
+
 
     std::ofstream out((filename + ".replace").c_str(), std::ios::out | std::ios::binary);
     out << file_content;

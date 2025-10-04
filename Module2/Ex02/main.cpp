@@ -13,5 +13,11 @@ int main() {
     std::cout << a << std::endl;
     std::cout << b << std::endl;
     std::cout << Fixed::max( a, b ) << std::endl;
+
+    Fixed c(10);
+    std::cout << c << std::endl;
+    std::cout << c*10 << std::endl;
+    std::cout << c/10 << std::endl;
+
     return 0;
 }

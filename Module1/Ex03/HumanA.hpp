@@ -7,9 +7,9 @@
 class HumanA
 {
     public:
-        HumanA(const std::string name, Weapon& weapon);
+        HumanA(std::string name, Weapon& weapon);
         ~HumanA();
-        void attack() const;
+        void attack();
 
     private: 
         Weapon& weapon;

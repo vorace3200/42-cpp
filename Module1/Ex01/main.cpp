@@ -8,6 +8,7 @@ int main() {
     {
         std::cout << "Announcing Zombie ID: #" << i << std::endl;
         Zombies[i].announce();
+         
     }
     delete[] Zombies;
     return 0;

@@ -56,9 +56,6 @@ void Fixed::setRawBits(int const raw)
     this->value = raw;
 }
 
-
-
-
 std::ostream& operator<<(std::ostream& os, const Fixed& obj)
 {
     os << obj.toFloat();
