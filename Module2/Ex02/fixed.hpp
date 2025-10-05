@@ -12,6 +12,7 @@ class Fixed
         Fixed(const float value);
         Fixed(const Fixed& other);
         Fixed& operator=(const Fixed& other);
+        ~Fixed();
 
         Fixed operator*(const Fixed& other) const;
         Fixed operator+(const Fixed& other) const;
@@ -35,9 +36,6 @@ class Fixed
         static const Fixed& min(const Fixed& a, const Fixed& b);
         static const Fixed& max(const Fixed& a, const Fixed& b);
 
-        ~Fixed();
-
-        
         int getRawBits() const;
         float toFloat() const;
         int toInt() const;
@@ -45,7 +43,7 @@ class Fixed
 
     private:
         int value;
-        static const int static_value = 8;
+        static const int factor = 8;
 
 };
 

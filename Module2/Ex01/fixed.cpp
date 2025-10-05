@@ -7,22 +7,24 @@ Fixed::Fixed()
 }
 Fixed::Fixed(const int value)
 {
-    this->value = value << 8;
+    std::cout << "Int constructor called" << std::endl;
+    this->value = value << factor;
 }
 
 Fixed::Fixed(const float value)
 {
-    this->value = roundf(value * (1 << 8)); 
+    std::cout << "Float constructor called" << std::endl;
+    this->value = roundf(value * (1 << factor)); 
 }
 
 float Fixed::toFloat() const
 {
-    return (float)this->value / (1 << 8);
+    return (float)this->value / (1 << factor);
 }
 
 int Fixed::toInt() const
 {
-    return this->value >> 8;
+    return this->value / (1 << factor);
 }
 
 

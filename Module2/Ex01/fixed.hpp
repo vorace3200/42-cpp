@@ -22,7 +22,7 @@ class Fixed
 
     private:
         int value;
-        static const int static_value = 8;
+        static const int factor = 8;
 
 };
 
