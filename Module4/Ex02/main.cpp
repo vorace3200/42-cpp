@@ -8,11 +8,13 @@
 
 int main()
 {
+    // const Animal* meta = new Animal();
     const Animal* j = new Dog();
     const Animal* i = new Cat();
     
     delete j;
     delete i;
+ 
     
     std::cout << std::endl;
     std::cout << "==== Array test ====" << std::endl;
