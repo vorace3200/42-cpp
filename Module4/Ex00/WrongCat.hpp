@@ -2,12 +2,12 @@
 
 #include <iostream>
 #include <string>
-#include "Animal.hpp"
-class Dog : public Animal
+#include "WrongAnimal.hpp"
+class WrongCat : public WrongAnimal
 {
     public:
-        Dog();
-        ~Dog();
+        WrongCat();
+        ~WrongCat();
         void makeSound() const;
     
 };

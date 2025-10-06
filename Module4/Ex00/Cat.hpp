@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include "animal.hpp"
+#include "Animal.hpp"
 class Cat : public Animal
 {
     public:
