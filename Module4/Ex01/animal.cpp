@@ -1,4 +1,4 @@
-#include "animal.hpp"
+#include "Animal.hpp"
 
 Animal::Animal()
 {
@@ -18,4 +18,12 @@ std::string Animal::getType() const
 void Animal::makeSound() const
 {
     std::cout << this->type << " say: grrr" << std::endl;
+}
+
+Animal& Animal::operator=(const Animal& other)
+{
+    std::cout << "[ANIMAL] Animal operator alled" << std::endl;
+    if (this != &other)
+        type = other.type;
+    return *this;
 }
