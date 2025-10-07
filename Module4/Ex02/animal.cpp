@@ -5,6 +5,12 @@ Animal::Animal()
     std::cout << "[ANIMAL] Animal class has been called" << std::endl;
 }
 
+Animal::Animal(const Animal& other)
+{
+    type = other.type;
+    std::cout << "[ANIMAL] Animal copy constructor called" << std::endl;
+}
+
 Animal::~Animal()
 {
     std::cout << "[ANIMAL] Animal destructor has been called" << std::endl;
