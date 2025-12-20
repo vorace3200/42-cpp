@@ -6,12 +6,15 @@ Intern::Intern()
 
 Intern::Intern(const Intern& other)
 {
-    (void)other;
+    *this = other;
 }
 
 Intern& Intern::operator=(const Intern& other)
 {
-    (void)other;
+    if (this != &other)
+    {
+        // bah il y a rien a dans le private a copier
+    }
     return *this;
 }
 
