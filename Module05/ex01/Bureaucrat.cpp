@@ -2,6 +2,11 @@
 #include "Form.hpp"
 
 
+Bureaucrat::Bureaucrat() : name("coucou"), grade(150)
+{
+    std::cout << "[DEBUG] Bureaucrat " << name << " created with the grade: " << grade << std::endl;
+}
+
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
     return "Grade too high";

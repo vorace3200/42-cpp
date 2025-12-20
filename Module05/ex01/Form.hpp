@@ -8,9 +8,11 @@ class Bureaucrat;
 class Form
 {
     public:
+        
+        Form();
         Form(std::string name, int grade_required_sign, int grade_required_execute);
-        Form(Form& other);
-        Form& operator=(Form& other);
+        Form(const Form& other);
+        Form& operator=(const Form& other);
         ~Form();
 
         std::string getName() const;

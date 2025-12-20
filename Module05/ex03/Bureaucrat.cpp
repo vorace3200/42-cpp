@@ -66,6 +66,11 @@ void Bureaucrat::executeForm(AForm const& form)
     }
 }
 
+Bureaucrat::Bureaucrat() : name("Default"), grade(150)
+{
+    std::cout << "[DEBUG] Bureaucrat " << name << " created with the grade: " << grade << std::endl;
+}
+
 Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
 {
     if (grade < 1)
@@ -75,7 +80,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
     std::cout << "[DEBUG] Bureaucrat " << name << " created with the grade: " << grade << std::endl;
 }
 
-Bureaucrat& Bureaucrat::operator=(Bureaucrat& other)
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 {
     std::cout << "[Bureaucrat] Operator called" << std::endl;
 
@@ -87,7 +92,7 @@ Bureaucrat& Bureaucrat::operator=(Bureaucrat& other)
     return *this;
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat& other)
+Bureaucrat::Bureaucrat(const Bureaucrat& other)
 {
     std::cout << "[Bureaucrat] Copy constructor called" << std::endl;
 

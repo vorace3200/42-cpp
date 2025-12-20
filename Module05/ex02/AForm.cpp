@@ -17,6 +17,14 @@ const char* AForm::NotSignedException::what() const throw()
     return "Form not signed";
 }
 
+AForm::AForm()
+{
+    this->name = "Default Form";
+    this->grade_required_sign = 150;
+    this->grade_required_execute = 150;
+    this->FormSigned = false;
+}
+
 AForm::AForm(std::string name, int grade_required_sign, int grade_required_execute)
 {
     if (grade_required_sign < 1 || grade_required_execute < 1)
@@ -29,7 +37,7 @@ AForm::AForm(std::string name, int grade_required_sign, int grade_required_execu
     this->FormSigned = false;
 }
 
-AForm::AForm(AForm& other)
+AForm::AForm(const AForm& other)
 {
     this->name = other.name;
     this->grade_required_sign = other.grade_required_sign;
@@ -37,12 +45,15 @@ AForm::AForm(AForm& other)
     this->FormSigned = other.FormSigned;    
 }
 
-AForm& AForm::operator=(AForm& other)
+AForm& AForm::operator=(const AForm& other)
 {
-    this->name = other.name;
-    this->grade_required_sign = other.grade_required_sign;
-    this->grade_required_execute = other.grade_required_execute;
-    this->FormSigned = other.FormSigned;
+    if (this != &other)
+    {
+        this->name = other.name;
+        this->grade_required_sign = other.grade_required_sign;
+        this->grade_required_execute = other.grade_required_execute;
+        this->FormSigned = other.FormSigned;
+    }
     return *this;
 }
 

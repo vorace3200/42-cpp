@@ -1,18 +1,25 @@
 #include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5), target("Default")
+{
+}
+
 PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("PresidentialPardonForm", 25, 5), target(target)
 {
 }
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm& other) : AForm(other), target(other.target)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) : AForm(other), target(other.target)
 {
 }
 
-PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm& other)
+PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& other)
 {
-    AForm::operator=(other);
-    this->target = other.target;
+    if (this != &other)
+    {
+        AForm::operator=(other);
+        this->target = other.target;
+    }
     return *this;
 }
 

@@ -4,12 +4,12 @@ Intern::Intern()
 {
 }
 
-Intern::Intern(Intern& other)
+Intern::Intern(const Intern& other)
 {
     (void)other;
 }
 
-Intern& Intern::operator=(Intern& other)
+Intern& Intern::operator=(const Intern& other)
 {
     (void)other;
     return *this;

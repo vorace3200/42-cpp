@@ -12,6 +12,14 @@ const char* Form::GradeTooLowException::what() const throw()
     return "Grade too low";
 }
 
+Form::Form()
+{
+    this->name = "Default Form";
+    this->grade_required_sign = 150;
+    this->grade_required_execute = 150;
+    this->FormSigned = false;
+}
+
 Form::Form(std::string name, int grade_required_sign, int grade_required_execute)
 {
     if (grade_required_sign < 1 || grade_required_execute < 1)
@@ -24,7 +32,7 @@ Form::Form(std::string name, int grade_required_sign, int grade_required_execute
     this->FormSigned = false;
 }
 
-Form::Form(Form& other)
+Form::Form(const Form& other)
 {
     this->name = other.name;
     this->grade_required_sign = other.grade_required_sign;
@@ -32,12 +40,15 @@ Form::Form(Form& other)
     this->FormSigned = other.FormSigned;    
 }
 
-Form& Form::operator=(Form& other)
+Form& Form::operator=(const Form& other)
 {
-    this->name = other.name;
-    this->grade_required_sign = other.grade_required_sign;
-    this->grade_required_execute = other.grade_required_execute;
-    this->FormSigned = other.FormSigned;
+    if (this != &other)
+    {
+        this->name = other.name;
+        this->grade_required_sign = other.grade_required_sign;
+        this->grade_required_execute = other.grade_required_execute;
+        this->FormSigned = other.FormSigned;
+    }
     return *this;
 }
 
