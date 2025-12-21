@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        std::cerr << "Usage: ./convert <literal>" << std::endl;
+        std::cerr << "Usage: ./convert (char / int / float / double) example: ./convert a" << std::endl;
         return 1;
     }
     ScalarConverter::convert(argv[1]);

@@ -47,37 +47,52 @@ void ScalarConverter::convert(std::string literal)
         f = static_cast<float>(c);
         d = static_cast<double>(c);
     }
+
     else if (isInt(literal)) {
+
         i = std::atoi(literal.c_str());
         c = static_cast<char>(i);
         f = static_cast<float>(i);
         d = static_cast<double>(i);
         impossibleChar = (i < 0 || i > 255); 
     }
+
     else if (isFloat(literal)) {
+
         f = std::strtof(literal.c_str(), NULL);
         d = static_cast<double>(f);
         i = static_cast<int>(f);
         c = static_cast<char>(f);
+
         if (literal == "nanf" || literal == "+inff" || literal == "-inff") {
             impossibleChar = true;
             impossibleInt = true;
-        } else {
+        } 
+        else 
+        {
             impossibleChar = (f < 0.0f || f > 255.0f);
-            if (f > static_cast<float>(INT_MAX) || f < static_cast<float>(INT_MIN)) impossibleInt = true;
+
+            if (f > static_cast<float>(INT_MAX) || f < static_cast<float>(INT_MIN)) 
+                impossibleInt = true;
         }
     }
+
     else if (isDouble(literal)) {
+
         d = std::strtod(literal.c_str(), NULL);
         f = static_cast<float>(d);
         i = static_cast<int>(d);
         c = static_cast<char>(d);
+
         if (literal == "nan" || literal == "+inf" || literal == "-inf") {
             impossibleChar = true;
             impossibleInt = true;
         } else {
+
             impossibleChar = (d < 0.0 || d > 255.0);
-            if (d > static_cast<double>(INT_MAX) || d < static_cast<double>(INT_MIN)) impossibleInt = true;
+
+            if (d > static_cast<double>(INT_MAX) || d < static_cast<double>(INT_MIN)) 
+                impossibleInt = true;
         }
     }
     else {
@@ -90,10 +105,10 @@ void ScalarConverter::convert(std::string literal)
 
     if (impossibleChar)
         std::cout << "char: impossible" << std::endl;
-    else if (!std::isprint(c))
-        std::cout << "char: Non displayable" << std::endl;
-    else
+    else if (std::isprint(c))
         std::cout << "char: '" << c << "'" << std::endl;
+    else
+        std::cout << "char: Non displayable" << std::endl;
 
     if (impossibleInt)
         std::cout << "int: impossible" << std::endl;
