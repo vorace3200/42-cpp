@@ -3,39 +3,39 @@
 #include <ctime>
 #include "Array.hpp"
 
-#define MAX_VAL 750
-
 int main(int, char**)
 {
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
     std::srand(time(NULL));
-    
-    for (int i = 0; i < MAX_VAL; i++)
+    int max_value = 750;
+    Array<int> numbers(max_value);
+    int* mirror = new int[max_value];
+    std::cout << "getSize of numbers : " << numbers.getSize() << std::endl;
+
+    for (int i = 0; i < max_value; i++)
     {
-        const int value = std::rand();
-        numbers[i] = value;
-        mirror[i] = value;
+        int random_value = std::rand();
+        numbers[i] = random_value;
+        mirror[i] = random_value;
     }
 
-    for (int i = 0; i < MAX_VAL; i++)
+    for (int i = 0; i < max_value; i++)
     {
         if (mirror[i] != numbers[i])
         {
-            std::cerr << "didn't save the same value!!" << std::endl;
+            std::cerr << "They don't have the same value." << std::endl;
             return 1;
         }
     }
-    
+    std::cout << "Set working good (mirror == numbers)" << std::endl;
     try
     {
         Array<int> tmp = numbers;
         Array<int> test(tmp);
-        if (tmp.size() > 0)
+        if (tmp.getSize() > 0)
             tmp[0] = -1;
         if (numbers[0] == -1)
         {
-             std::cerr << "Deep copy failed!" << std::endl;
+             std::cerr << "There is a problem with the deep copy." << std::endl;
              return 1;
         }
     }
@@ -43,6 +43,9 @@ int main(int, char**)
     {
         std::cerr << e.what() << '\n';
     }
+    std::cout << "Copy constructor working good (tmp[0] != numbers[0])" << std::endl;
+
+
     try
     {
         numbers[-2] = 0;
@@ -51,20 +54,17 @@ int main(int, char**)
     {
         std::cerr << "Expected exception: " << e.what() << '\n';
     }
+
     try
     {
-        numbers[MAX_VAL] = 0;
+        numbers[max_value] = 0;
     }
     catch(const std::exception& e)
     {
         std::cerr << "Expected exception: " << e.what() << '\n';
     }
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = std::rand();
-    }
     
-    std::cout << "All tests passed successfully!" << std::endl;
+    std::cout << "end of the program :)" << std::endl;
 
     delete [] mirror;
     return 0;

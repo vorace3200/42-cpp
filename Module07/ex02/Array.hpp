@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <stdexcept>
 #include <cstdlib>
 
@@ -7,22 +6,22 @@ template <typename T>
 class Array
 {
     private:
-        T* _data;
-        unsigned int _size;
+        T* data;
+        unsigned int size;
 
     public:
-        Array() : _data(NULL), _size(0) {}
+        Array() : data(NULL), size(0) {}
 
-        Array(unsigned int n) : _data(new T[n]()), _size(n) {}
+        Array(unsigned int n) : data(new T[n]()), size(n) {}
 
-        Array(const Array& other) : _data(NULL), _size(0)
+        Array(const Array& other) : data(NULL), size(0)
         {
-            if (other._size > 0)
+            if (other.size > 0)
             {
-                _data = new T[other._size]();
-                for (unsigned int i = 0; i < other._size; i++)
-                    _data[i] = other._data[i];
-                _size = other._size;
+                data = new T[other.size]();
+                for (unsigned int i = 0; i < other.size; i++)
+                    data[i] = other.data[i];
+                size = other.size;
             }
         }
 
@@ -30,41 +29,41 @@ class Array
         {
             if (this != &other)
             {
-                delete[] _data;
-                _size = other._size;
-                if (_size > 0)
+                delete[] data;
+                size = other.size;
+                if (size > 0)
                 {
-                    _data = new T[_size]();
-                    for (unsigned int i = 0; i < _size; i++)
-                        _data[i] = other._data[i];
+                    data = new T[size]();
+                    for (unsigned int i = 0; i < size; i++)
+                        data[i] = other.data[i];
                 }
                 else
-                    _data = NULL;
+                    data = NULL;
             }
             return *this;
         }
 
         ~Array()
         {
-            delete[] _data;
+            delete[] data;
         }
 
         T& operator[](unsigned int index)
         {
-            if (index >= _size)
+            if (index >= size)
                 throw std::out_of_range("Index out of bounds");
-            return _data[index];
+            return data[index];
         }
 
         const T& operator[](unsigned int index) const
         {
-             if (index >= _size)
+             if (index >= size)
                 throw std::out_of_range("Index out of bounds");
-            return _data[index];
+            return data[index];
         }
 
-        unsigned int size() const
+        unsigned int getSize() const
         {
-            return _size;
+            return size;
         }
 };
