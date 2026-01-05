@@ -1,10 +1,10 @@
 #include "MutantStack.hpp"
 #include <iostream>
-#include <list>
+#include <vector>
 
 int main()
 {
-    std::cout << "--- MutantStack Test ---" << std::endl;
+    std::cout << "Testing with mutant stack: " << std::endl;
     MutantStack<int> mstack;
     mstack.push(5);
     mstack.push(17);
@@ -26,25 +26,25 @@ int main()
     }
     std::stack<int> s(mstack);
 
-    std::cout << "\n--- List Test (Comparison) ---" << std::endl;
-    std::list<int> lst;
-    lst.push_back(5);
-    lst.push_back(17);
-    std::cout << lst.back() << std::endl;
-    lst.pop_back();
-    std::cout << lst.size() << std::endl;
-    lst.push_back(3);
-    lst.push_back(5);
-    lst.push_back(737);
-    lst.push_back(0);
-    std::list<int>::iterator lit = lst.begin();
-    std::list<int>::iterator lite = lst.end();
-    ++lit;
-    --lit;
-    while (lit != lite)
+    std::cout << "Testing with vector: " << std::endl;
+    std::vector<int> vec;
+    vec.push_back(5);
+    vec.push_back(17);
+    std::cout << vec.back() << std::endl;
+    vec.pop_back();
+    std::cout << vec.size() << std::endl;
+    vec.push_back(3);
+    vec.push_back(5);
+    vec.push_back(737);
+    vec.push_back(0);
+    std::vector<int>::iterator vit = vec.begin();
+    std::vector<int>::iterator vite = vec.end();
+    ++vit;
+    --vit;
+    while (vit != vite)
     {
-        std::cout << *lit << std::endl;
-        ++lit;
+        std::cout << *vit << std::endl;
+        ++vit;
     }
 
     return 0;
