@@ -10,11 +10,11 @@
 
 class BitcoinExchange {
 	private:
-		std::map<std::string, float> _data;
+		std::map<std::string, float> data;
 		
-		void	_parseDb(void);
-		bool	_isValidDate(const std::string& date) const;
-		bool	_isValidValue(const float& value) const;
+		void	parse_db(void);
+		bool	is_valid_date(const std::string& date) const;
+		bool	is_valid_value(const float& value) const;
 		
 	public:
 		BitcoinExchange();

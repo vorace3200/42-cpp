@@ -1,7 +1,7 @@
 #include "BitcoinExchange.hpp"
 
 BitcoinExchange::BitcoinExchange() {
-	this->_parseDb();
+	parse_db();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& src) {
@@ -10,14 +10,14 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange& src) {
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& src) {
 	if (this != &src) {
-		this->_data = src._data;
+		data = src.data;
 	}
 	return *this;
 }
 
 BitcoinExchange::~BitcoinExchange() {}
 
-void BitcoinExchange::_parseDb(void) {
+void BitcoinExchange::parse_db(void) {
 	std::ifstream file("data.csv");
 	if (!file.is_open()) {
 		std::cerr << "Error: could not open data.csv" << std::endl;
@@ -33,15 +33,15 @@ void BitcoinExchange::_parseDb(void) {
 			continue;
 		
 		std::string date = line.substr(0, delim);
-		std::string valueStr = line.substr(delim + 1);
+		std::string value_str = line.substr(delim + 1);
 		
-		float value = std::atof(valueStr.c_str());
-		this->_data[date] = value;
+		float value = std::atof(value_str.c_str());
+		data[date] = value;
 	}
 	file.close();
 }
 
-bool BitcoinExchange::_isValidDate(const std::string& date) const {
+bool BitcoinExchange::is_valid_date(const std::string& date) const {
 	if (date.length() != 10) return false;
 	if (date[4] != '-' || date[7] != '-') return false;
 	
@@ -54,8 +54,8 @@ bool BitcoinExchange::_isValidDate(const std::string& date) const {
 	if (day < 1 || day > 31) return false;
 
 	if (month == 2) {
-		bool isLeap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
-		if (day > (isLeap ? 29 : 28)) return false;
+		bool is_leap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+		if (day > (is_leap ? 29 : 28)) return false;
 	} else if (month == 4 || month == 6 || month == 9 || month == 11) {
 		if (day > 30) return false;
 	}
@@ -63,7 +63,7 @@ bool BitcoinExchange::_isValidDate(const std::string& date) const {
 	return true;
 }
 
-bool BitcoinExchange::_isValidValue(const float& value) const {
+bool BitcoinExchange::is_valid_value(const float& value) const {
 	return value >= 0 && value <= 1000;
 }
 
@@ -87,20 +87,20 @@ void BitcoinExchange::run(const std::string& filename) {
 		}
 
 		std::string date = line.substr(0, delim);
-		std::string valueStr = line.substr(delim + 1);
+		std::string value_str = line.substr(delim + 1);
 
 		if (!date.empty() && date[date.size() - 1] == ' ')
 			date.erase(date.size() - 1);
-		if (!valueStr.empty() && valueStr[0] == ' ')
-			valueStr.erase(0, 1);
+		if (!value_str.empty() && value_str[0] == ' ')
+			value_str.erase(0, 1);
 		
-		if (!this->_isValidDate(date)) {
+		if (!is_valid_date(date)) {
 			std::cout << "Error: bad input => " << date << std::endl;
 			continue;
 		}
 
 		char* end;
-		double val = std::strtod(valueStr.c_str(), &end);
+		double val = std::strtod(value_str.c_str(), &end);
 		
 		if (val < 0) {
 			std::cout << "Error: not a positive number." << std::endl;
@@ -110,22 +110,22 @@ void BitcoinExchange::run(const std::string& filename) {
 			std::cout << "Error: too large a number." << std::endl;
 			continue;
 		}
-		if (valueStr != "0" && val == 0 && end == valueStr.c_str()) { 
+		if (value_str != "0" && val == 0 && end == value_str.c_str()) { 
 			std::cout << "Error: bad input => " << line << std::endl;
             continue;
         }
 
-		std::map<std::string, float>::iterator it = this->_data.lower_bound(date);
+		std::map<std::string, float>::iterator it = data.lower_bound(date);
 		
 		if (it->first != date) {
-			if (it == this->_data.begin()) {
+			if (it == data.begin()) {
 				std::cout << "Error: no data valid for this date." << std::endl;
 				continue;
 			}
 			--it;
 		}
 		
-		std::cout << date << " => " << valueStr << " = " << val * it->second << std::endl;
+		std::cout << date << " => " << value_str << " = " << val * it->second << std::endl;
 	}
 	file.close();
 }
