@@ -9,7 +9,7 @@ int main(int, char**)
     int max_value = 750;
     Array<int> numbers(max_value);
     int* mirror = new int[max_value];
-    std::cout << "getSize of numbers : " << numbers.getSize() << std::endl;
+    std::cout << "getSize of numbers : " << numbers.size() << std::endl;
 
     for (int i = 0; i < max_value; i++)
     {
@@ -31,7 +31,7 @@ int main(int, char**)
     {
         Array<int> tmp = numbers;
         Array<int> test(tmp);
-        if (tmp.getSize() > 0)
+        if (tmp.size() > 0)
             tmp[0] = -1;
         if (numbers[0] == -1)
         {
