@@ -39,16 +39,21 @@ int RPN::calculate(const std::string& expr) {
 
 	while (iss >> token) {
 		if (is_operator(token)) {
+
 			if (stack.size() < 2)
 				throw std::runtime_error("not enough operands");
 			
-			int b = stack.top(); stack.pop();
-			int a = stack.top(); stack.pop();
+			int b = stack.top(); 
+			stack.pop();
+			int a = stack.top(); 
+			stack.pop();
+
 			stack.push(apply_op(a, b, token[0]));
 		}
 		else {
 			if (token.length() != 1 || !std::isdigit(token[0]))
 				throw std::runtime_error("invalid token");
+			
 			stack.push(token[0] - '0');
 		}
 	}

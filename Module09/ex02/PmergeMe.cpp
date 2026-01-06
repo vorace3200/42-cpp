@@ -56,36 +56,40 @@ void PmergeMe::binary_insert(T& arr, int value, int end) {
 
 void PmergeMe::ford_johnson_vec(std::vector<int>& arr) {
 	int n = arr.size();
-	if (n <= 1) return;
+	if (n <= 1) return;  // 1 seul dans le vect = deja trie
 
-	std::vector<std::pair<int, int> > pairs;
+	std::vector<std::pair<int, int> > pairs; // (grand, petit)
 	std::vector<int> main_chain;
-	std::vector<int> pend;
+	std::vector<int> pend; // petis restants
 
+	// former les pairs (grand, petit)
 	for (int i = 0; i + 1 < n; i += 2) {
 		int a = arr[i];
 		int b = arr[i + 1];
-		if (a > b) {
+		if (a > b)
 			pairs.push_back(std::make_pair(a, b));
-		} else {
+		else
 			pairs.push_back(std::make_pair(b, a));
-		}
 	}
 
-	bool has_straggler = (n % 2 == 1);
-	int straggler = has_straggler ? arr[n - 1] : 0;
+	bool has_retenue = (n % 2 == 1);
+	int retenue = has_retenue ? arr[n - 1] : 0;
 
 	if (pairs.size() > 1) {
 		std::vector<int> largers;
 		for (size_t i = 0; i < pairs.size(); i++)
 			largers.push_back(pairs[i].first);
-		ford_johnson_vec(largers);
+		// on garde ques les "grands" nombre pour les triers
+		
+		ford_johnson_vec(largers); // on reforme les grands tries (grand, petit) 
 
+		// reordonner les paires selon les grands tries : (grand, petit) -> (petit, grand) []
 		std::vector<std::pair<int, int> > sorted_pairs;
 		for (size_t i = 0; i < largers.size(); i++) {
 			for (size_t j = 0; j < pairs.size(); j++) {
 				if (pairs[j].first == largers[i]) {
-					sorted_pairs.push_back(pairs[j]);
+					// on a trouve notre larger, du coup on a notre petit, on l'ajoute a sorted_pairs.
+					sorted_pairs.push_back(pairs[j]); 
 					pairs.erase(pairs.begin() + j);
 					break;
 				}
@@ -94,12 +98,15 @@ void PmergeMe::ford_johnson_vec(std::vector<int>& arr) {
 		pairs = sorted_pairs;
 	}
 
+	// plus petit 1er pair (b1)
 	main_chain.push_back(pairs[0].second);
 	for (size_t i = 0; i < pairs.size(); i++)
-		main_chain.push_back(pairs[i].first);
+		main_chain.push_back(pairs[i].first);  // + tous les grands
 
+	// les petits restants vont dans pend
 	for (size_t i = 1; i < pairs.size(); i++)
 		pend.push_back(pairs[i].second);
+
 
 	size_t jacobsthal[] = {1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, 21845};
 	size_t j_idx = 0;
@@ -107,18 +114,20 @@ void PmergeMe::ford_johnson_vec(std::vector<int>& arr) {
 
 	while (inserted < pend.size()) {
 		size_t group_end = (j_idx < 15) ? jacobsthal[j_idx] : pend.size();
-		if (group_end > pend.size()) group_end = pend.size();
+		if (group_end > pend.size()) 
+			group_end = pend.size();
 
 		for (size_t i = group_end; i > inserted; ) {
 			--i;
+			// on insert le petit dans le main_chain
 			binary_insert(main_chain, pend[i], main_chain.size());
 		}
 		inserted = group_end;
 		j_idx++;
 	}
 
-	if (has_straggler)
-		binary_insert(main_chain, straggler, main_chain.size());
+	if (has_retenue)
+		binary_insert(main_chain, retenue, main_chain.size());
 
 	arr = main_chain;
 }
@@ -134,15 +143,14 @@ void PmergeMe::ford_johnson_deq(std::deque<int>& arr) {
 	for (int i = 0; i + 1 < n; i += 2) {
 		int a = arr[i];
 		int b = arr[i + 1];
-		if (a > b) {
+		if (a > b)
 			pairs.push_back(std::make_pair(a, b));
-		} else {
+		else
 			pairs.push_back(std::make_pair(b, a));
-		}
 	}
 
-	bool has_straggler = (n % 2 == 1);
-	int straggler = has_straggler ? arr[n - 1] : 0;
+	bool has_retenue = (n % 2 == 1);
+	int retenue = has_retenue ? arr[n - 1] : 0;
 
 	if (pairs.size() > 1) {
 		std::deque<int> largers;
@@ -186,8 +194,8 @@ void PmergeMe::ford_johnson_deq(std::deque<int>& arr) {
 		j_idx++;
 	}
 
-	if (has_straggler)
-		binary_insert(main_chain, straggler, main_chain.size());
+	if (has_retenue)
+		binary_insert(main_chain, retenue, main_chain.size());
 
 	arr = main_chain;
 }

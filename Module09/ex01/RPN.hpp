@@ -7,12 +7,6 @@
 # include <cstdlib>
 
 class RPN {
-	private:
-		std::stack<int>	stack;
-
-		bool	is_operator(const std::string& token) const;
-		int		apply_op(int a, int b, char op);
-
 	public:
 		RPN();
 		RPN(const RPN& src);
@@ -20,6 +14,12 @@ class RPN {
 		~RPN();
 
 		int		calculate(const std::string& expr);
+
+	private:
+	
+		std::stack<int>	stack;
+		bool	is_operator(const std::string& token) const;
+		int		apply_op(int a, int b, char op);
 };
 
 #endif
